@@ -16,14 +16,14 @@
                     <h1 class="text-3xl font-bold mb-2">{{ $user->name }}</h1>
                     <p class="text-emerald-200 text-sm mb-3">Portal Single Sign-On PT BKI</p>
                     <div class="flex flex-wrap justify-center md:justify-start gap-2">
-                        <span class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold">
+                        <span class="inline-flex items-center whitespace-nowrap gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
                             </svg>
                             {{ $user->getRoleNames()->join(', ') ?: 'User' }}
                         </span>
                         @if($user->is_active)
-                        <span class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold">
+                        <span class="inline-flex items-center whitespace-nowrap gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold">
                             <span class="w-1.5 h-1.5 bg-emerald-300 rounded-full animate-pulse"></span>
                             Akun Aktif
                         </span>
@@ -42,7 +42,7 @@
                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Detail informasi akun Anda</p>
             </div>
             <a href="{{ route('profile') }}" wire:navigate
-               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+               class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                 </svg>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="min-w-0">
                     <p class="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Status Akun</p>
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $user->is_active ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 ring-1 ring-red-600/10' }}">
+                    <span class="inline-flex items-center whitespace-nowrap gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $user->is_active ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 ring-1 ring-red-600/10' }}">
                         <span class="w-1.5 h-1.5 rounded-full {{ $user->is_active ? 'bg-emerald-500' : 'bg-red-500' }}"></span>
                         {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
                     </span>

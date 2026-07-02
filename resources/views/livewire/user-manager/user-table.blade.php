@@ -28,7 +28,7 @@
                             @if($user->roles->isNotEmpty())
                                 <div class="flex flex-wrap gap-1">
                                     @foreach($user->roles as $role)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
+                                        <span class="inline-flex items-center whitespace-nowrap px-2.5 py-0.5 rounded-full text-xs font-semibold
                                             {{ $role->name === 'super-admin' ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 ring-1 ring-amber-600/10' : ($role->name === 'admin' ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 ring-1 ring-gray-300/50 dark:ring-gray-600') }}">
                                             {{ $role->name }}
                                         </span>

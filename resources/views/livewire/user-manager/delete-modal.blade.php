@@ -10,7 +10,7 @@
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Yakin ingin menghapus <span class="font-semibold text-gray-700 dark:text-white">{{ $deletingUserName }}</span>? Semua data termasuk token dan riwayat login akan dihapus.</p>
                 <div class="flex items-center justify-center gap-3">
                     <x-cancel-button wire:click="closeModal" target="closeModal" />
-                    <button wire:click="deleteUser" class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
+                    <button wire:click="deleteUser" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
                         <svg wire:loading wire:target="deleteUser" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                         Ya, Hapus
                     </button>

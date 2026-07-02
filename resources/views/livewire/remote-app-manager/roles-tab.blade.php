@@ -56,12 +56,12 @@
                     @if(count($role['permissions']) > 0)
                         <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
                             @foreach(array_slice($role['permissions'], 0, 8) as $perm)
-                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                <span class="inline-flex items-center whitespace-nowrap px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                                     {{ $perm['name'] }}
                                 </span>
                             @endforeach
                             @if(count($role['permissions']) > 8)
-                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
+                                <span class="inline-flex items-center whitespace-nowrap px-1.5 py-0.5 rounded text-[10px] font-medium bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
                                     +{{ count($role['permissions']) - 8 }} lainnya
                                 </span>
                             @endif
@@ -98,7 +98,7 @@
                         <p class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">{{ $groupName }}</p>
                         <div class="flex flex-wrap gap-1">
                             @foreach($permissions as $perm)
-                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                <span class="inline-flex items-center whitespace-nowrap px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                                     {{ $perm['name'] }}
                                 </span>
                             @endforeach

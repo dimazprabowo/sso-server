@@ -7,7 +7,7 @@
         </div>
         @can('roles_create')
             <button wire:click="openCreateModal"
-                    class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-sm text-sm transition disabled:opacity-70 disabled:cursor-not-allowed"
+                    class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-sm text-sm transition disabled:opacity-70 disabled:cursor-not-allowed"
                     wire:loading.attr="disabled"
                     wire:target="openCreateModal">
                 <svg wire:loading.class.remove="inline-block" wire:loading.class.add="hidden" wire:target="openCreateModal" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
@@ -62,7 +62,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex flex-wrap gap-1.5">
                                     @forelse($role->permissions as $perm)
-                                        <span class="inline-flex px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                        <span class="inline-flex px-2 py-0.5 rounded-md text-xs font-medium whitespace-nowrap bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                                             {{ $permissionLabels[$perm->name] ?? $perm->name }}
                                         </span>
                                     @empty
@@ -159,7 +159,7 @@
                     <div class="flex justify-end gap-3 pt-2">
                         <x-cancel-button wire:click="closeModal" target="closeModal" variant="bordered" />
                         <button type="submit"
-                                class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-sm text-sm transition inline-flex items-center gap-2"
+                                class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl shadow-sm text-sm transition inline-flex items-center justify-center gap-2"
                                 wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
                             <svg wire:loading wire:target="save" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
                             Simpan
@@ -185,7 +185,7 @@
                 <div class="flex justify-center gap-3">
                     <x-cancel-button wire:click="closeModal" target="closeModal" variant="bordered" />
                     <button wire:click="deleteRole"
-                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-sm text-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
+                            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-sm text-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
                         <svg wire:loading wire:target="deleteRole" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                         Hapus
                     </button>

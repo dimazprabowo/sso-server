@@ -61,7 +61,7 @@
                                 @if($user->roles->isNotEmpty())
                                     <div class="flex flex-wrap gap-1">
                                         @foreach($user->roles as $role)
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10">
+                                            <span class="inline-flex items-center whitespace-nowrap px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10">
                                                 {{ $role->name }}
                                             </span>
                                         @endforeach
@@ -72,19 +72,19 @@
                             </td>
                             <td class="px-6 py-4">
                                 @if($user->hasRole('super-admin'))
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 ring-1 ring-amber-600/10">
+                                    <span class="inline-flex items-center whitespace-nowrap gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 ring-1 ring-amber-600/10">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                         Semua Aplikasi
                                     </span>
                                 @elseif($user->clientApps->isNotEmpty())
                                     <div class="flex flex-wrap gap-1.5">
                                         @foreach($user->clientApps->take(3) as $app)
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                            <span class="inline-flex items-center whitespace-nowrap px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                                                 {{ $app->name }}
                                             </span>
                                         @endforeach
                                         @if($user->clientApps->count() > 3)
-                                            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+                                            <span class="inline-flex items-center whitespace-nowrap px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
                                                 +{{ $user->clientApps->count() - 3 }} lainnya
                                             </span>
                                         @endif
@@ -168,7 +168,7 @@
                                             <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">{{ $app->name }}</p>
                                             <p class="text-xs text-gray-400 dark:text-gray-500 truncate">{{ $app->domain }}</p>
                                         </div>
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium {{ $app->is_active ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400' }}">
+                                        <span class="inline-flex items-center whitespace-nowrap gap-1 px-2 py-0.5 rounded-full text-xs font-medium {{ $app->is_active ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400' }}">
                                             <span class="w-1.5 h-1.5 rounded-full {{ $app->is_active ? 'bg-emerald-500' : 'bg-red-500' }}"></span>
                                             {{ $app->is_active ? 'Aktif' : 'Nonaktif' }}
                                         </span>
@@ -179,7 +179,7 @@
 
                         <div class="flex items-center justify-end gap-3 pt-5 mt-5 border-t border-gray-100 dark:border-gray-700">
                             <x-cancel-button wire:click="closeModal" target="closeModal" />
-                            <button wire:click="saveAccess" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
+                            <button wire:click="saveAccess" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
                                 <svg wire:loading wire:target="saveAccess" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                                 Simpan Akses
                             </button>
@@ -203,7 +203,7 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Yakin ingin mencabut semua akses aplikasi untuk <span class="font-semibold text-gray-700 dark:text-white">{{ $revokingUserName }}</span>? User tidak akan bisa mengakses aplikasi apapun.</p>
                     <div class="flex items-center justify-center gap-3">
                         <x-cancel-button wire:click="closeRevokeModal" target="closeRevokeModal" />
-                        <button wire:click="revokeAllAccess" class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
+                        <button wire:click="revokeAllAccess" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl shadow-sm transition-all" wire:loading.attr="disabled" wire:loading.class="opacity-70 cursor-not-allowed">
                             <svg wire:loading wire:target="revokeAllAccess" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                             Ya, Cabut Semua
                         </button>
