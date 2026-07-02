@@ -48,7 +48,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex flex-wrap gap-1">
                                     @forelse($user['roles'] as $role)
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap
                                             {{ $role['name'] === 'super admin' ? 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 ring-1 ring-red-600/10' : ($role['name'] === 'admin' ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 ring-1 ring-amber-600/10' : 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 ring-1 ring-blue-600/10') }}">
                                             {{ $role['name'] }}
                                         </span>
