@@ -39,11 +39,11 @@
                                         <h5 class="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">{{ $groupName }}</h5>
                                         <span class="text-[10px] text-gray-400 dark:text-gray-500">{{ count($permissions) }}</span>
                                     </div>
-                                    <div class="grid grid-cols-2 gap-2">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         @foreach($permissions as $perm)
-                                            <label class="flex items-center gap-2 p-2 rounded-lg cursor-pointer transition hover:bg-white dark:hover:bg-gray-800" wire:key="role-perm-{{ $perm['id'] }}">
-                                                <input type="checkbox" value="{{ $perm['id'] }}" wire:model="rolePermissions" class="w-3.5 h-3.5 rounded border-gray-300 dark:border-gray-600 text-emerald-600 focus:ring-emerald-500/40 dark:bg-gray-700">
-                                                <span class="text-xs text-gray-700 dark:text-gray-300">{{ $perm['name'] }}</span>
+                                            <label class="flex items-center gap-2 p-2 rounded-lg cursor-pointer transition hover:bg-white dark:hover:bg-gray-800 min-w-0" wire:key="role-perm-{{ $perm['id'] }}">
+                                                <input type="checkbox" value="{{ $perm['id'] }}" wire:model="rolePermissions" class="w-3.5 h-3.5 rounded border-gray-300 dark:border-gray-600 text-emerald-600 focus:ring-emerald-500/40 dark:bg-gray-700 shrink-0">
+                                                <span class="text-xs text-gray-700 dark:text-gray-300 break-words min-w-0">{{ $perm['name'] }}</span>
                                             </label>
                                         @endforeach
                                     </div>
