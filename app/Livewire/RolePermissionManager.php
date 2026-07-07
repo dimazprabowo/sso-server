@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Traits\HasDynamicLike;
 use App\Livewire\Traits\HasNotification;
 use App\Services\RolePermissionService;
 use Illuminate\Support\Facades\Gate;
@@ -14,9 +15,10 @@ use Spatie\Permission\Models\Role;
 #[Title('Role & Permission')]
 class RolePermissionManager extends Component
 {
-    use HasNotification;
+    use HasNotification, HasDynamicLike;
 
     public string $search = '';
+    public bool $filterChanged = false;
 
     public bool $showRoleModal = false;
     public bool $showDeleteModal = false;
@@ -28,6 +30,11 @@ class RolePermissionManager extends Component
 
     public string $roleName = '';
     public array $selectedPermissions = [];
+
+    public function updatedSearch(): void
+    {
+        $this->filterChanged = true;
+    }
 
     public function openCreateModal(): void
     {
@@ -121,10 +128,16 @@ class RolePermissionManager extends Component
     {
         Gate::authorize('viewAny', Role::class);
 
+        $operator = $this->getLikeOperator();
         $roles = Role::with('permissions')
-            ->when($this->search, fn($q) => $q->where('name', 'ilike', "%{$this->search}%"))
+            ->when($this->search, fn($q) => $q->where('name', $operator, "%{$this->search}%"))
             ->orderBy('name')
             ->get();
+
+        if ($this->filterChanged) {
+            $this->notifySuccess("Ditemukan " . $roles->count() . " data role.");
+            $this->filterChanged = false;
+        }
 
         $permissionGroups = $service->buildPermissionGroups();
         $permissionLabels = $service->getPermissionLabels();

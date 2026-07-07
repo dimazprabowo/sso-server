@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Traits\HasDynamicLike;
 use App\Livewire\Traits\HasNotification;
 use App\Models\ClientApp;
 use App\Models\User;
@@ -16,7 +17,7 @@ use Livewire\WithPagination;
 #[Title('Akses Aplikasi')]
 class UserAppAccess extends Component
 {
-    use WithPagination, HasNotification;
+    use WithPagination, HasNotification, HasDynamicLike;
 
     public string $search = '';
     public string $isActiveFilter = '';
@@ -48,6 +49,14 @@ class UserAppAccess extends Component
             ['value' => '1', 'label' => 'Aktif'],
             ['value' => '0', 'label' => 'Nonaktif'],
         ];
+    }
+
+    public function resetFilters(): void
+    {
+        $this->isActiveFilter = '';
+        $this->resetPage();
+        $this->filterChanged = true;
+        $this->notifySuccess('Filter berhasil direset.');
     }
 
     public function openAssignModal(int $userId): void
@@ -151,9 +160,10 @@ class UserAppAccess extends Component
         $query = User::with(['clientApps', 'roles']);
 
         if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('name', 'ilike', "%{$this->search}%")
-                  ->orWhere('email', 'ilike', "%{$this->search}%");
+            $operator = $this->getLikeOperator();
+            $query->where(function ($q) use ($operator) {
+                $q->where('name', $operator, "%{$this->search}%")
+                  ->orWhere('email', $operator, "%{$this->search}%");
             });
         }
 

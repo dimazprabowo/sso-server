@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Traits\HasDynamicLike;
 use App\Livewire\Traits\HasNotification;
 use App\Models\User;
 use App\Services\AppSyncService;
@@ -17,7 +18,7 @@ use Spatie\Permission\Models\Role;
 #[Title('Kelola User')]
 class UserManager extends Component
 {
-    use WithPagination, HasNotification;
+    use WithPagination, HasNotification, HasDynamicLike;
 
     public string $search = '';
     public string $isActiveFilter = '';
@@ -56,6 +57,14 @@ class UserManager extends Component
             ['value' => '1', 'label' => 'Aktif'],
             ['value' => '0', 'label' => 'Nonaktif'],
         ];
+    }
+
+    public function resetFilters(): void
+    {
+        $this->isActiveFilter = '';
+        $this->resetPage();
+        $this->filterChanged = true;
+        $this->notifySuccess('Filter berhasil direset.');
     }
 
     public function openCreateModal(): void
@@ -231,9 +240,10 @@ class UserManager extends Component
         $query = User::with('roles');
 
         if ($this->search) {
-            $query->where(function ($q) {
-                $q->where('name', 'ilike', "%{$this->search}%")
-                  ->orWhere('email', 'ilike', "%{$this->search}%");
+            $operator = $this->getLikeOperator();
+            $query->where(function ($q) use ($operator) {
+                $q->where('name', $operator, "%{$this->search}%")
+                  ->orWhere('email', $operator, "%{$this->search}%");
             });
         }
 

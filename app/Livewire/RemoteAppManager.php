@@ -68,6 +68,13 @@ class RemoteAppManager extends Component
         $this->userFilterChanged = true;
     }
 
+    public function resetFilters(): void
+    {
+        $this->userIsActiveFilter = '';
+        $this->userFilterChanged = true;
+        $this->notifySuccess('Filter berhasil direset.');
+    }
+
     public function loadRemoteData(): void
     {
         $service = app(RemoteAppService::class);

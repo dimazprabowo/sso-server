@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Profile;
 
+use App\Livewire\Traits\HasDynamicLike;
 use App\Livewire\Traits\HasNotification;
 use App\Models\User;
 use App\Services\ImpersonateService;
@@ -16,21 +17,55 @@ use Spatie\Permission\Models\Role;
 #[Title('Profil')]
 class ImpersonateUser extends Component
 {
-    use WithPagination, AuthorizesRequests, HasNotification;
+    use WithPagination, AuthorizesRequests, HasNotification, HasDynamicLike;
 
     protected $paginationTheme = 'tailwind';
 
     public string $search = '';
     public string $roleFilter = '';
+    public string $isActiveFilter = '';
+    public bool $filterChanged = false;
 
-    public function updatingSearch(): void
+    public function updatedSearch(): void
     {
         $this->resetPage();
+        $this->filterChanged = true;
     }
 
-    public function updatingRoleFilter(): void
+    public function updatedRoleFilter(): void
     {
         $this->resetPage();
+        $this->filterChanged = true;
+    }
+
+    public function updatedIsActiveFilter(): void
+    {
+        $this->resetPage();
+        $this->filterChanged = true;
+    }
+
+    public function getIsActiveOptionsProperty(): array
+    {
+        return [
+            ['value' => '1', 'label' => 'Aktif'],
+            ['value' => '0', 'label' => 'Nonaktif'],
+        ];
+    }
+
+    public function getRoleOptionsProperty(): array
+    {
+        return Role::orderBy('name')->get()
+            ->map(fn ($role) => ['value' => $role->name, 'label' => ucfirst($role->name)])
+            ->toArray();
+    }
+
+    public function resetFilters(): void
+    {
+        $this->roleFilter = '';
+        $this->isActiveFilter = '';
+        $this->resetPage();
+        $this->filterChanged = true;
+        $this->notifySuccess('Filter berhasil direset.');
     }
 
     public function startImpersonate(int $userId, ImpersonateService $service): void
@@ -51,15 +86,34 @@ class ImpersonateUser extends Component
     {
         abort_unless(auth()->user()->can('users_impersonate'), 403);
 
-        $query = User::query()
-            ->when($this->search, fn($q) => $q->where('name', 'ilike', "%{$this->search}%")
-                ->orWhere('email', 'ilike', "%{$this->search}%"))
-            ->when($this->roleFilter, fn($q) => $q->role($this->roleFilter))
-            ->where('id', '!=', auth()->id())
-            ->orderBy('name');
+        $query = User::with('roles')
+            ->where('id', '!=', auth()->id());
+
+        if ($this->search) {
+            $operator = $this->getLikeOperator();
+            $query->where(function ($q) use ($operator) {
+                $q->where('name', $operator, "%{$this->search}%")
+                  ->orWhere('email', $operator, "%{$this->search}%");
+            });
+        }
+
+        if ($this->roleFilter) {
+            $query->role($this->roleFilter);
+        }
+
+        if ($this->isActiveFilter !== '') {
+            $query->where('is_active', $this->isActiveFilter === '1');
+        }
+
+        $users = $query->orderBy('name')->paginate(8);
+
+        if ($this->filterChanged) {
+            $this->notifySuccess("Ditemukan {$users->total()} data user.");
+            $this->filterChanged = false;
+        }
 
         return view('livewire.profile.impersonate-user', [
-            'users' => $query->paginate(8),
+            'users' => $users,
             'roles' => Role::orderBy('name')->get(),
         ]);
     }

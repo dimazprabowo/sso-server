@@ -23,7 +23,7 @@
             <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
             <input wire:model.live.debounce.300ms="search" type="text" placeholder="Cari role..." class="flex-1 ml-3 text-sm text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 border-0 focus:ring-0 focus:outline-none bg-transparent">
             @if($search)
-                <button wire:click="$set('search', '')" 
+                <button wire:click="$set('search', '')"
                     class="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition disabled:opacity-50"
                     wire:loading.attr="disabled"
                     wire:target="$set('search', '')">Reset</button>
