@@ -6,11 +6,9 @@ use App\Livewire\Traits\HasNotification;
 use App\Services\SsoAuthService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\RateLimiter;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-#[Layout('layouts.auth')]
 class LoginForm extends Component
 {
     use HasNotification;

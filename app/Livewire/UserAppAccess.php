@@ -8,13 +8,9 @@ use App\Models\ClientApp;
 use App\Models\User;
 use App\Services\AppSyncService;
 use Illuminate\Support\Facades\Gate;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Layout('layouts.app', ['title' => 'Akses Aplikasi'])]
-#[Title('Akses Aplikasi')]
 class UserAppAccess extends Component
 {
     use WithPagination, HasNotification, HasDynamicLike;

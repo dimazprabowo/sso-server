@@ -4,12 +4,8 @@ namespace App\Livewire;
 
 use App\Models\ClientApp;
 use App\Models\User;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('layouts.app', ['title' => 'Dashboard'])]
-#[Title('Dashboard')]
 class Dashboard extends Component
 {
     public function render()

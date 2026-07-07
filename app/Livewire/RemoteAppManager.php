@@ -6,12 +6,8 @@ use App\Livewire\Traits\HasNotification;
 use App\Models\ClientApp;
 use App\Services\RemoteAppService;
 use Illuminate\Support\Facades\Gate;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('layouts.app', ['title' => 'Kelola Remote App'])]
-#[Title('Kelola Remote App')]
 class RemoteAppManager extends Component
 {
     use HasNotification;

@@ -5,12 +5,8 @@ namespace App\Livewire\Pages;
 use App\Livewire\Traits\HasNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('layouts.app', ['title' => 'Profil'])]
-#[Title('Profil')]
 class Profile extends Component
 {
     use HasNotification;

@@ -1,15 +1,5 @@
 <?php
 
-use App\Livewire\Auth\ForgotPassword;
-use App\Livewire\Auth\LoginForm;
-use App\Livewire\Auth\ResetPassword;
-use App\Livewire\ClientAppManager;
-use App\Livewire\Dashboard;
-use App\Livewire\RemoteAppManager;
-use App\Livewire\Pages\Profile;
-use App\Livewire\RolePermissionManager;
-use App\Livewire\UserAppAccess;
-use App\Livewire\UserManager;
 use App\Models\ClientApp;
 use App\Services\SsoAuthService;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +10,11 @@ Route::get('/', function () {
 
 // Guest routes
 Route::middleware('guest')->group(function () {
-    Route::get('/login', LoginForm::class)->name('login');
-    Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
-    Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
+    Route::view('/login', 'auth.login')->name('login');
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('auth.reset-password', ['token' => $token]);
+    })->name('password.reset');
 });
 
 // Logout
@@ -66,11 +58,13 @@ Route::post('/logout', function (SsoAuthService $authService) {
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/users', UserManager::class)->middleware('can:users_view')->name('users.index');
-    Route::get('/roles', RolePermissionManager::class)->middleware('can:roles_view')->name('roles.index');
-    Route::get('/client-apps', ClientAppManager::class)->middleware('can:client_apps_view')->name('client-apps.index');
-    Route::get('/client-apps/{app}/manage', RemoteAppManager::class)->middleware('can:client_apps_manage')->name('client-apps.manage');
-    Route::get('/user-access', UserAppAccess::class)->middleware('can:user_access_view')->name('user-access.index');
+    Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
+    Route::view('/profile', 'pages.profile')->name('profile');
+    Route::view('/users', 'pages.users')->middleware('can:users_view')->name('users.index');
+    Route::view('/roles', 'pages.roles')->middleware('can:roles_view')->name('roles.index');
+    Route::view('/client-apps', 'pages.client-apps')->middleware('can:client_apps_view')->name('client-apps.index');
+    Route::get('/client-apps/{app}/manage', function (ClientApp $app) {
+        return view('pages.remote-app', ['app' => $app]);
+    })->middleware('can:client_apps_manage')->name('client-apps.manage');
+    Route::view('/user-access', 'pages.user-access')->middleware('can:user_access_view')->name('user-access.index');
 });

@@ -7,14 +7,10 @@ use App\Livewire\Traits\HasNotification;
 use App\Models\User;
 use App\Services\ImpersonateService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 
-#[Layout('layouts.app', ['title' => 'Profil'])]
-#[Title('Profil')]
 class ImpersonateUser extends Component
 {
     use WithPagination, AuthorizesRequests, HasNotification, HasDynamicLike;

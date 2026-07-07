@@ -6,13 +6,9 @@ use App\Livewire\Traits\HasDynamicLike;
 use App\Livewire\Traits\HasNotification;
 use App\Services\RolePermissionService;
 use Illuminate\Support\Facades\Gate;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
-#[Layout('layouts.app', ['title' => 'Role & Permission'])]
-#[Title('Role & Permission')]
 class RolePermissionManager extends Component
 {
     use HasNotification, HasDynamicLike;

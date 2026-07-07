@@ -7,13 +7,9 @@ use App\Livewire\Traits\HasNotification;
 use App\Models\ClientApp;
 use App\Services\ClientAppService;
 use Illuminate\Support\Facades\Gate;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Layout('layouts.app', ['title' => 'Client Apps'])]
-#[Title('Client Apps')]
 class ClientAppManager extends Component
 {
     use WithPagination, HasNotification, HasDynamicLike;

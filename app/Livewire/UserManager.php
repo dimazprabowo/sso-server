@@ -8,14 +8,10 @@ use App\Models\User;
 use App\Services\AppSyncService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 
-#[Layout('layouts.app', ['title' => 'Kelola User'])]
-#[Title('Kelola User')]
 class UserManager extends Component
 {
     use WithPagination, HasNotification, HasDynamicLike;

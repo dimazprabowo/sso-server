@@ -1,3 +1,4 @@
+@props(['title' => null])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
       x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' || localStorage.getItem('darkMode') === null && window.matchMedia('(prefers-color-scheme: dark)').matches }"
@@ -8,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'SSO Server') }}</title>
+        <title>{{ $title ? $title . ' - ' . config('app.name', 'SSO Server') : config('app.name', 'SSO Server') }}</title>
 
         <!-- Favicon -->
         <link rel="icon" type="image/webp" href="{{ asset('images/bki-main.webp') }}">

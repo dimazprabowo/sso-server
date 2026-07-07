@@ -6,11 +6,9 @@ use App\Livewire\Traits\HasNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-#[Layout('layouts.auth')]
 class ResetPassword extends Component
 {
     use HasNotification;
