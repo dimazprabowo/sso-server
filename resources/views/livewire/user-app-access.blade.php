@@ -64,7 +64,7 @@
                                 @if($user->roles->isNotEmpty())
                                     <div class="flex flex-wrap gap-1">
                                         @foreach($user->roles as $role)
-                                            <span class="inline-flex items-center whitespace-nowrap px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10">
+                                            <span wire:key="access-role-{{ $user->id }}-{{ $role->id }}" class="inline-flex items-center whitespace-nowrap px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/10">
                                                 {{ $role->name }}
                                             </span>
                                         @endforeach

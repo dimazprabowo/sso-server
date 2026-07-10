@@ -45,7 +45,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                     @forelse($roles as $role)
-                        <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition">
+                        <tr wire:key="sso-role-{{ $role->id }}" class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-lg {{ $role->name === 'super-admin' ? 'bg-amber-50 dark:bg-amber-900/30' : 'bg-emerald-50 dark:bg-emerald-900/30' }} flex items-center justify-center shrink-0">
@@ -62,7 +62,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex flex-wrap gap-1.5">
                                     @forelse($role->permissions as $perm)
-                                        <span class="inline-flex px-2 py-0.5 rounded-md text-xs font-medium whitespace-nowrap bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+                                        <span wire:key="perm-{{ $role->id }}-{{ $perm->id }}" class="inline-flex px-2 py-0.5 rounded-md text-xs font-medium whitespace-nowrap bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                                             {{ $permissionLabels[$perm->name] ?? $perm->name }}
                                         </span>
                                     @empty
